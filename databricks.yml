@@ -8,9 +8,9 @@ variables:
   lakebase_autoscaling_project:
     default: bakehouse-benoit
   function_1_name:
-    default: top_products_by_franchise
+    default: top_artists
   function_2_name:
-    default: franchise_performance
+    default: most_played_tracks
   embedding_endpoint:
     default: databricks-gte-large-en
   embedding_dims:
@@ -20,9 +20,9 @@ resources:
     bakehouse_experiment:
       name: /Users/${workspace.current_user.userName}/bakehouse_app_experiment
   apps:
-    bakehouse-benoit:
-      name: bakehouse-benoit
-      description: Bakehouse Franchise Sales Assistant with stateful memory
+    datarocker-benoit:
+      name: datarocker-benoit
+      description: Spotify Listening Behavior Analyst with stateful memory
       source_code_path: .
       config:
         command:
@@ -36,7 +36,7 @@ resources:
         - name: CATALOG_NAME
           value: ${var.catalog_name}
         - name: SCHEMA_NAME
-          value: bakehouse
+          value: spotify
         - name: LAKEBASE_AUTOSCALING_PROJECT
           value: ${var.lakebase_autoscaling_project}
         - name: LAKEBASE_AUTOSCALING_BRANCH
@@ -60,12 +60,12 @@ resources:
           permission: CAN_EDIT
       - name: uc-function-1
         uc_securable:
-          securable_full_name: ${var.catalog_name}.bakehouse.${var.function_1_name}
+          securable_full_name: ${var.catalog_name}.spotify.${var.function_1_name}
           securable_type: FUNCTION
           permission: EXECUTE
       - name: uc-function-2
         uc_securable:
-          securable_full_name: ${var.catalog_name}.bakehouse.${var.function_2_name}
+          securable_full_name: ${var.catalog_name}.spotify.${var.function_2_name}
           securable_type: FUNCTION
           permission: EXECUTE
       - name: database

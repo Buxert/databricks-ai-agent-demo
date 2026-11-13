@@ -1,23 +1,60 @@
 env:
   - name: SERVING_ENDPOINT_NAME
-    valueFrom: serving-endpoint
+    value: "databricks-gpt-oss-120b"
   - name: MLFLOW_EXPERIMENT_ID
-    valueFrom: experiment
+    value: "1741130149320947"
   - name: CATALOG_NAME
     value: "labuser_benoit"
   - name: SCHEMA_NAME
-    value: "bakehouse"
+    value: "spotify"
   - name: LAKEBASE_AUTOSCALING_PROJECT
     value: "bakehouse-benoit"
   - name: LAKEBASE_AUTOSCALING_BRANCH
     value: "production"
   - name: FUNCTION_1_NAME
-    value: "top_products_by_franchise"
+    value: "top_artists"
   - name: FUNCTION_2_NAME
-    value: "franchise_performance"
+    value: "most_played_tracks"
   - name: EMBEDDING_ENDPOINT
     value: "databricks-gte-large-en"
   - name: EMBEDDING_DIMS
     value: "1024"
+  - name: DATABRICKS_WAREHOUSE_ID
+    value: "9c5a18fc5dd09e63"
+  - name: PLAY_HISTORY_TABLE
+    value: "labuser_benoit.spotify.play_history"
 
 command: ["python", "server.py"]
+
+resources:
+  - name: "serving-endpoint"
+    serving_endpoint:
+      name: "databricks-gpt-oss-120b"
+      permission: "CAN_QUERY"
+  - name: "experiment"
+    experiment:
+      experiment_id: "1741130149320947"
+      permission: "CAN_EDIT"
+  - name: "uc-function-1"
+    uc_securable:
+      securable_full_name: "labuser_benoit.spotify.top_artists"
+      securable_type: "FUNCTION"
+      permission: "EXECUTE"
+  - name: "uc-function-2"
+    uc_securable:
+      securable_full_name: "labuser_benoit.spotify.most_played_tracks"
+      securable_type: "FUNCTION"
+      permission: "EXECUTE"
+  - name: "database"
+    postgres:
+      branch: "projects/bakehouse-benoit/branches/production"
+      database: "projects/bakehouse-benoit/branches/production/databases/databricks-postgres"
+      permission: "CAN_CONNECT_AND_CREATE"
+  - name: "sql-warehouse"
+    sql_warehouse:
+      name: "Serverless Starter Warehouse"
+      permission: "CAN_USE"
+  - name: "play-history-table"
+    table:
+      name: "labuser_benoit.spotify.play_history"
+      permission: "SELECT"

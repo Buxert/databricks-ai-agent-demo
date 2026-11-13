@@ -257,7 +257,7 @@
   <img class="header-logo" data-logo alt="Team Rockstars IT">
   <div class="header-text">
     <div class="header-title">DataRocker</div>
-    <div class="header-subtitle">Bakehouse Franchise Analytics &bull; by Team Rockstars IT</div>
+    <div class="header-subtitle">Spotify Listening Analytics &bull; by Team Rockstars IT</div>
   </div>
 </div>
 
@@ -265,18 +265,18 @@
   <div class="welcome-card">
     <img class="welcome-logo" data-logo alt="Team Rockstars IT">
     <h2>Welcome to DataRocker</h2>
-    <p>I'm DataRocker, your franchise sales assistant for Bakehouse. Ask me about product trends, franchise performance, revenue comparisons, and more across all 48 locations.</p>
+    <p>I'm DataRocker, your personal Spotify listening analyst. Ask me about your top artists and tracks, listening trends over time, or fun patterns in your history.</p>
     <div class="welcome-suggestions">
-      <div class="suggestion-chip" onclick="sendSuggestion(this)">Top products in Tokyo?</div>
-      <div class="suggestion-chip" onclick="sendSuggestion(this)">Compare US vs. Europe revenue</div>
-      <div class="suggestion-chip" onclick="sendSuggestion(this)">Best performing franchise?</div>
+      <div class="suggestion-chip" onclick="sendSuggestion(this)">What are my top artists?</div>
+      <div class="suggestion-chip" onclick="sendSuggestion(this)">My top tracks of the last 30 days?</div>
+      <div class="suggestion-chip" onclick="sendSuggestion(this)">How much Armin van Buuren did I listen to?</div>
     </div>
   </div>
 </div>
 
 <div class="input-area">
   <div class="input-wrapper">
-    <textarea id="user-input" rows="1" placeholder="Ask about your franchise sales..." onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+    <textarea id="user-input" rows="1" placeholder="Ask about your listening habits..." onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
     <button id="send-btn" onclick="sendMessage()">&#x27A4;</button>
   </div>
 </div>
